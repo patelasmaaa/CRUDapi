@@ -3,13 +3,13 @@ let mongoose = require('mongoose');
 let bodyparser = require('body-parser');
 let users = require('../models/user');
 
-//insert
+//Insert:
 exports.add = function(req, res){
 	let newUser = new users(req.body);
 	newUser.save(function(err, data){
 		if(err) res.send(err);
-
-		res.json(data);
+		console.log("Add in db");
+		res.send(data);
 	});
 }
 
@@ -18,7 +18,7 @@ exports.usersAll = function(req, res){
 	users.find({}, function(err, data){
 		if(err) res.send(err);
 
-		res.json(data);
+		res.send(data);
 	});
 };
 
@@ -31,7 +31,7 @@ exports.delete = function(req, res){
 	}, function(err, product){
 		if(err) res.send(err);
 
-		res.json({message: 'Deleted'});
+		res.send({message: 'Deleted'});
 	});
 };
 
@@ -41,7 +41,7 @@ exports.fetch = function(req, res){
 	users.findById(mongoose.Types.ObjectId(Uid), function(err, data){
 		if(err) res.send(err);
 
-		res.json(data);
+		res.send(data);
 	});
 };
 
@@ -51,7 +51,7 @@ exports.update = function(req, res){
 	users.findOneAndUpdate({_id: id}, req.body, {new:true}, function(err, data){
 		if(err) res.send(err);
 
-		res.json(data);
+		res.send(data);
 	});
 };
 

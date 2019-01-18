@@ -1,7 +1,6 @@
 {
   "name": "Task2",
   "version": "1.0.0",
-  "description": "",
   "main": "file1.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,6 +9,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "ejs": "^2.6.1",
+    "jquery": "^3.3.1",
     "mongoose": "^5.4.4"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/patelasmaaa/CRUDapi.git"
+  },
+  "bugs": {
+    "url": "https://github.com/patelasmaaa/CRUDapi/issues"
+  },
+  "homepage": "https://github.com/patelasmaaa/CRUDapi#readme",
+  "devDependencies": {},
+  "description": ""
 }
