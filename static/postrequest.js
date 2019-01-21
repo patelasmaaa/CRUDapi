@@ -41,11 +41,33 @@ function ajaxSearch(){
 			contentType : "application/json",
 			url : "http://localhost:8080/users/",
 			dataType : 'json',
-			complete : function(user) {
+			/*complete : function(user) {
 				$("#ResultDiv").html("<p>" +
 					"Successful! <br>" +
 					"--> " + user.responseText + "</p>");
-			},
+			},*/
+			success: function (response) {
+				console.log(response);
+				for(var i=0; i<response.length; i++){
+					var Html=`<tr><td>`+response[i]._id+`</td><td>`
+					+response[i].firstname+"</td><td>"+response[i].lastname;$('#ResultDiv').append(Html);
+				}
+
+//`<td><input type="button" value="Update" onclick=""> <button value="`+response[i]._id`" onclick="ajaxDelete(this.value)"> Delete </button> </td></tr>`
+
+			/*$('#ResultDiv').html(response.map(user => {
+					return `<td>
+						<tr> ${user._id }</tr>
+						<tr> ${user.firstname }</tr>
+						<tr> ${user.lastname }</tr>
+					</td>`}))*/
+					/*return `<li data-id="${ user._id }">
+					<span>${ user._id }</span>
+					<span>${ user.firstname }</span>
+					<span>${ user.lastname }</span>
+					</li>`;
+					}).join(''));*/
+},
 			error : function(e) {
 				alert("Error!")
 				console.log("ERROR: ", e);
@@ -58,24 +80,21 @@ function ajaxSearch(){
 */
     }
 function ajaxDelete(){
-			/*let divElement = document.getElementById("divId");
-			if(divElement.style.display === "none"){
-				divElement.style.display == "";
-			}*/
     	// PREPARE FORM DATA
-    	var formData = {
+    	/*var formData = {
     		firstname : $("#firstname").val(),
     		lastname :  $("#lastname").val(),
     		userId :$("#userId").val()
-    	}
+    	}*/
     	console.log($("#userId").val());
     	//console.log(firstname);
     	$.ajax({
 			type : "DELETE",
 			contentType : "application/json",
-			url : "http://localhost:8080/users/" + $("#userId").val(),
 			dataType : 'json',
-			data : JSON.stringify(formData),
+			//url : "http://localhost:8080/users/",
+			url : "http://localhost:8080/users/" + $("#userId").val(),
+			//data : JSON.stringify(formData),
 			success : function(user) {
 				$("#ResultDiv").html("<p>" +
 					"Deleted! <br> </p>");
@@ -92,10 +111,6 @@ function ajaxDelete(){
 */  }
 
 function ajaxUpdate(){
-			/*let divElement = document.getElementById("divId");
-			if(divElement.style.display === "none"){
-				divElement.style.display == "";
-			}*/
     	// PREPARE FORM DATA
     	var formData = {
     		firstname : $("#firstname").val(),
@@ -126,3 +141,10 @@ function ajaxUpdate(){
     }
 */
 }
+
+/*function ajaxDeleteUpdate(){
+	var divElement = document.getElementById("deleteUpdate");
+			if(divElement.style.display === "block"){
+				divElement.style.display === "none";
+			}
+}*/
