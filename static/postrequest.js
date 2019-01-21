@@ -1,4 +1,4 @@
-		function ajaxInsert(){
+function ajaxInsert(){
 
     	// PREPARE FORM DATA
     	var formData = {
@@ -45,6 +45,40 @@ function ajaxSearch(){
 				$("#ResultDiv").html("<p>" +
 					"Successful! <br>" +
 					"--> " + user.responseText + "</p>");
+			},
+			error : function(e) {
+				alert("Error!")
+				console.log("ERROR: ", e);
+			}
+		});
+    /*function resetData(){
+    	$("#firstname").val("");
+    	$("#lastname").val("");
+    }
+*/
+    }
+function ajaxDelete(){
+			/*let divElement = document.getElementById("divId");
+			if(divElement.style.display === "none"){
+				divElement.style.display == "";
+			}*/
+    	// PREPARE FORM DATA
+    	var formData = {
+    		firstname : $("#firstname").val(),
+    		lastname :  $("#lastname").val(),
+    		userId :$("#userId").val()
+    	}
+    	console.log($("#userId").val());
+    	//console.log(firstname);
+    	$.ajax({
+			type : "DELETE",
+			contentType : "application/json",
+			url : "http://localhost:8080/users/" + $("#userId").val(),
+			dataType : 'json',
+			data : JSON.stringify(formData),
+			success : function(user) {
+				$("#ResultDiv").html("<p>" +
+					"Deleted! <br> </p>");
 			},
 			error : function(e) {
 				alert("Error!")

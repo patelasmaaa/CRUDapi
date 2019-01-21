@@ -24,10 +24,13 @@ exports.usersAll = function(req, res){
 
 //Delete:
 exports.delete = function(req, res){
-	let id = mongoose.Types.ObjectId(req.query.userId);
+	/*let id = mongoose.Types.ObjectId();
+	console.log("Deleting " + id);*/
 
-	users.remove({
-		_id: id
+	users.deleteOne({
+		/*firstname: req.query.firstname,
+		lastname: req.query.lastname*/
+		_id : req.params.userId
 	}, function(err, product){
 		if(err) res.send(err);
 		console.log("Delete from db");
