@@ -1,12 +1,4 @@
-$( document ).ready(function() {
-
-	// SUBMIT FORM
-    $("#form").submit(function(event) {
-		// Prevent the form from submitting via the browser.
-		event.preventDefault();
-		ajaxPost();
-	});
-    function ajaxPost(){
+		function ajaxInsert(){
 
     	// PREPARE FORM DATA
     	var formData = {
@@ -19,10 +11,10 @@ $( document ).ready(function() {
 			type : "POST",
 			contentType : "application/json",
 			url : "http://localhost:8080/users",
-			data : JSON.stringify(formData),
 			dataType : 'json',
+			data : JSON.stringify(formData),
 			success : function(user) {
-				$("#postResultDiv").html("<p>" +
+				$("#ResultDiv").html("<p>" +
 					"Post Successfully! <br>" +
 					"--> " + user.firstname + " " + user.lastname + "</p>");
 			},
@@ -31,15 +23,37 @@ $( document ).ready(function() {
 				console.log("ERROR: ", e);
 			}
 		});
-
-    	// Reset FormData after Posting
-    	resetData();
-
-    }
-
-    function resetData(){
+    /*function resetData(){
     	$("#firstname").val("");
     	$("#lastname").val("");
     }
-})
+*/
+    }
+function ajaxSearch(){
 
+    	/*var formData = {
+    		firstname : $("#firstname").val(),
+    		lastname :  $("#lastname").val()
+    	}*/
+
+    	$.ajax({
+			type : "GET",
+			contentType : "application/json",
+			url : "http://localhost:8080/users/",
+			dataType : 'json',
+			complete : function(user) {
+				$("#ResultDiv").html("<p>" +
+					"Successful! <br>" +
+					"--> " + user.responseText + "</p>");
+			},
+			error : function(e) {
+				alert("Error!")
+				console.log("ERROR: ", e);
+			}
+		});
+    /*function resetData(){
+    	$("#firstname").val("");
+    	$("#lastname").val("");
+    }
+*/
+    }

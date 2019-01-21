@@ -7,10 +7,16 @@
 	<script src="js/postrequest.js"></script>
 </head>
 <body>
-<form id="form" method="post">
+<form id="form">
 	First name:  <input type="text" id="firstname"><br><br>
 	Last name: <input type="text" id="lastname"> <br><br>
-	<input type="submit">
+	<input type="button" value="Insert" id="insert" onclick="ajaxInsert()">
+	<input type="button" value="Delete" id="delete" onclick="ajaxDelete()">
+	<input type="button" value="Update" id="update" onclick="ajaxUpdate()">
+	<input type="button" value="Search" id="search" onclick="ajaxSearch()">
 </form>
+<div id="ResultDiv">
+
+</div>
 </body>
 </html>
