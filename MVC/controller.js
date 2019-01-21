@@ -50,11 +50,22 @@ exports.fetch = function(req, res){
 
 //Update:
 exports.update = function(req, res){
-	let id = mongoose.Types.ObjectId(req.query.userId);
-	users.findOneAndUpdate({_id: id}, req.body, {new:true}, function(err, data){
+	//let id = mongoose.Types.ObjectId(req.query.userId);
+	console.log("Update Id: " + req.params.userId);
+	console.log("Update Id (body): " + req.body.userId);
+	console.log("Update firstname: " + req.body.firstname);
+	console.log("Update lastname: " + req.body.lastname);
+	users.findOneAndUpdate({
+		_id: req.body.userId,
+	},
+	{
+		_id: req.body.userId,
+		firstname: req.body.firstname,
+		lastname: req.body.lastname
+	},
+	{new:true}, function(err, data){
 		if(err) res.send(err);
 		console.log("Updated");
 		res.send(data);
 	});
 };
-

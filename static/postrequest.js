@@ -89,5 +89,40 @@ function ajaxDelete(){
     	$("#firstname").val("");
     	$("#lastname").val("");
     }
-*/
+*/  }
+
+function ajaxUpdate(){
+			/*let divElement = document.getElementById("divId");
+			if(divElement.style.display === "none"){
+				divElement.style.display == "";
+			}*/
+    	// PREPARE FORM DATA
+    	var formData = {
+    		firstname : $("#firstname").val(),
+    		lastname :  $("#lastname").val(),
+    		userId :$("#userId").val()
+    	}
+    	console.log($("#userId").val());
+    	console.log($("#firstname").val());
+    	console.log($("#lastname").val());
+    	$.ajax({
+			type : "PUT",
+			contentType : "application/json",
+			url : "http://localhost:8080/users/" + $("#userId").val(),
+			dataType : 'json',
+			data : JSON.stringify(formData),
+			success : function(user) {
+				$("#ResultDiv").html("<p>" +
+					"Updated! <br> </p>");
+			},
+			error : function(e) {
+				alert("Error!")
+				console.log("ERROR: ", e);
+			}
+		});
+    /*function resetData(){
+    	$("#firstname").val("");
+    	$("#lastname").val("");
     }
+*/
+}
