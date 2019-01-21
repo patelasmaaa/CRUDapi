@@ -51,7 +51,8 @@ function ajaxSearch(){
 				for(var i=0; i<response.length; i++){
 					var Html=`<tr><td>`+response[i]._id+`</td><td>`
 					+response[i].firstname+"</td><td>"+response[i].lastname
-					+`<td><input type="button" value="Update" onclick=""> <button value="`
+					+`<td><button value="`
+					+ response[i]._id + `" onclick="ajaxUpdate(this.value)"> Update </button> <button value="`
 					+ response[i]._id + `" onclick="ajaxDelete(this.value)"> Delete </button> </td></tr>`;$('#ResultDiv').append(Html);
 				}
 			/*$('#ResultDiv').html(response.map(user => {
@@ -72,19 +73,10 @@ function ajaxSearch(){
 				console.log("ERROR: ", e);
 			}
 		});
-    /*function resetData(){
-    	$("#firstname").val("");
-    	$("#lastname").val("");
-    }
-*/
+
     }
 function ajaxDelete(id){
     	// PREPARE FORM DATA
-    	/*var formData = {
-    		firstname : $("#firstname").val(),
-    		lastname :  $("#lastname").val(),
-    		userId :$("#userId").val()
-    	}*/
     	console.log($("#userId").val());
     	//console.log(firstname);
     	$.ajax({
@@ -93,7 +85,6 @@ function ajaxDelete(id){
 			dataType : 'json',
 			url : "http://localhost:8080/users/" + id,
 			/*url : "http://localhost:8080/users/" + $("#userId").val(),*/
-			//data : JSON.stringify(formData),
 			success : function(user) {
 				$("#ResultDiv").html("<p>" +
 					"Deleted! <br> </p>");
@@ -103,27 +94,24 @@ function ajaxDelete(id){
 				console.log("ERROR: ", e);
 			}
 		});
-    /*function resetData(){
-    	$("#firstname").val("");
-    	$("#lastname").val("");
-    }
-*/  }
+}
 
-function ajaxUpdate(){
+function ajaxUpdate(id){
     	// PREPARE FORM DATA
     	var formData = {
     		firstname : $("#firstname").val(),
     		lastname :  $("#lastname").val(),
     		userId :$("#userId").val()
     	}
-    	console.log($("#userId").val());
+    	/*console.log($("#userId").val());
     	console.log($("#firstname").val());
-    	console.log($("#lastname").val());
+    	console.log($("#lastname").val());*/
     	$.ajax({
 			type : "PUT",
 			contentType : "application/json",
-			url : "http://localhost:8080/users/" + $("#userId").val(),
 			dataType : 'json',
+			//url : "http://localhost:8080/users/" + $("#userId").val(),
+			url : "http://localhost:8080/users/" + id,
 			data : JSON.stringify(formData),
 			success : function(user) {
 				$("#ResultDiv").html("<p>" +
@@ -134,11 +122,6 @@ function ajaxUpdate(){
 				console.log("ERROR: ", e);
 			}
 		});
-    /*function resetData(){
-    	$("#firstname").val("");
-    	$("#lastname").val("");
-    }
-*/
 }
 
 /*function ajaxDeleteUpdate(){
